@@ -1,0 +1,29 @@
+version: '2'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes_from:
+            - php
+        volumes:
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./var/logs/nginx:/var/log/nginx
+        depends_on:
+            - php
+    php:
+        build:
+            context: ./docker/php/
+        volumes:
+            - ${SILEX_APP_PATH}:/var/www/code
+        expose:
+            - 9000
+    mysql:
+        image: mysql:5.7.16
+        volumes:
+            - ./var/data/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}

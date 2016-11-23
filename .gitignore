@@ -1,0 +1,16 @@
+/.idea/
+/vendor/
+
+# Cache and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+
+/bin/*
+!bin/console
+
+/var/data/*
+
+.env
