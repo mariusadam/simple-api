@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'db' => [
+        'driver' => 'pdo_mysql',
+        'dbname' => 'api_database',
+        'host' => 'mysql',
+        'user' => 'api_user',
+        'password' => 'abcd1234',
+    ],
+    'cache_dir' => __DIR__.'/../var/cache',
+];

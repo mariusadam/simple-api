@@ -1,17 +1,20 @@
 <?php
 
+use Api\Entity\Employee;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-//Request::setTrustedProxies(array('127.0.0.1'));
+require_once __DIR__.'/services.php';
 
-$app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array());
-})
-->bind('homepage')
+//Request::setTrustedProxies(array('127.0.0.1'));
+/** @var \Silex\Application $app */
+
+$app
+    ->post('/employee', 'employee.controller:createAction')
+    ->bind('create_employee')
 ;
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {

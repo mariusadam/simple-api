@@ -1,0 +1,12 @@
+Api\Entity\Employee:
+    properties:
+        firstName:
+            type: string
+        lastName:
+            type: string
+        age:
+            type: integer
+        about:
+            type: string
+        interests:
+            type: array<string>

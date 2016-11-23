@@ -27,20 +27,39 @@
         "symfony/security": "~2.8|3.0.*",
         "symfony/translation": "~2.8|3.0.*",
         "symfony/twig-bridge": "~2.8|3.0.*",
-        "symfony/validator": "~2.8|3.0.*"
+        "symfony/validator": "^3.1",
+        "doctrine/dbal": "^2.5",
+        "symfony/yaml": "^3.1",
+        "jms/serializer": "^1.4",
+        "cube/composer-dist-installer": "~1.0@beta"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.1"
     },
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "": "src/" }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"
-        }
+        },
+        "dist-installer-params": [
+            {
+                "file": "config/params.php",
+                "dist-file": "config/params.php.dist"
+            }
+        ]
     },
     "scripts": {
         "run": [
             "echo 'Started web server on http://localhost:8888'",
             "php -S localhost:8888 -t web"
+        ],
+        "post-install-cmd": [
+            "Cube\\ComposerDistInstaller\\Bootstrap::install"
+        ],
+        "post-update-cmd": [
+            "Cube\\ComposerDistInstaller\\Bootstrap::install"
         ]
     }
 }
