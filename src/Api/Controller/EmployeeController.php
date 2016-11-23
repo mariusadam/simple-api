@@ -12,8 +12,6 @@ class EmployeeController extends BaseController
     {
         $employee = $this->getSerializer()->deserialize($request->getContent(), Employee::class, 'json');
 
-        dump($employee);
-
-        return $this->json($this->getSerializer()->serialize($employee, 'json'), Response::HTTP_CREATED, true);
+        return $this->json($request->getContent(), Response::HTTP_CREATED, true);
     }
 }

@@ -31,13 +31,17 @@
         "doctrine/dbal": "^2.5",
         "symfony/yaml": "^3.1",
         "jms/serializer": "^1.4",
-        "cube/composer-dist-installer": "~1.0@beta"
+        "cube/composer-dist-installer": "~1.0@beta",
+        "zircote/swagger-php": "^2.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.1"
     },
     "autoload": {
         "psr-4": { "": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "extra": {
         "branch-alias": {

@@ -17,18 +17,17 @@ $app
     ->bind('create_employee')
 ;
 
+$app->get('/swagger.json', function (){
+    $swagger = \Swagger\scan(__DIR__.'/../vendor/zircote/swagger-php/Examples/swagger-spec/petstore-with-external-docs');
+    return new JsonResponse($swagger, 200, [], true);
+});
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
     }
 
-    // 404.html, or 40x.html, or 4xx.html, or error.html
-    $templates = array(
-        'errors/'.$code.'.html.twig',
-        'errors/'.substr($code, 0, 2).'x.html.twig',
-        'errors/'.substr($code, 0, 1).'xx.html.twig',
-        'errors/default.html.twig',
-    );
-
-    return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
+    $app['monolog']->addError($e->getMessage());
+    $app['monolog']->addError($e->getTraceAsString());
+    return new JsonResponse(array('code' => $code, 'message' => $e->getMessage()));
 });
